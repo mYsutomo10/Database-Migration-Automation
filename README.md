@@ -1,12 +1,13 @@
 # Database Migration Automation
 
-## Overview
+## Project Overview
 
-This project provides a robust, scalable, and secure solution for automated database migrations with zero-downtime capabilities, leveraging PostgreSQL, Jenkins, Liquibase, and Ansible.
+A robust, scalable solution for automated database migrations with zero-downtime capabilities, leveraging PostgreSQL, Jenkins, Liquibase, and Ansible.
 
 ## Features
 
 - **Zero-Downtime Migrations**: Seamless database schema updates
+- **Flexible Environment Configuration**: Advanced environment variable management
 - **CI/CD Integration**: Fully automated migration pipeline
 - **Infrastructure as Code**: Consistent and repeatable deployments
 - **High Availability**: Multi-tier redundancy and failover support
@@ -19,18 +20,20 @@ This project provides a robust, scalable, and secure solution for automated data
 - **Migration Tool**: Liquibase
 - **CI/CD**: Jenkins
 - **Infrastructure**: Ansible
-- **Optional Orchestration**: Kubernetes
+- **Containerization**: Docker
+- **Orchestration**: Kubernetes (Optional)
 
 ## Prerequisites
 
-- PostgreSQL 12+ 
+- PostgreSQL 13+
+- Docker 20+
 - Jenkins 2.x
 - Liquibase 4.5+
 - Ansible 2.9+
-- Git
-- Docker (optional)
+- Python 3.9+
+- Node.js 18+
 
-## Installation
+## Installation and Setup
 
 ### 1. Clone the Repository
 ```bash
@@ -38,58 +41,51 @@ git clone https://github.com/your-org/database-migration-automation.git
 cd database-migration-automation
 ```
 
-### 2. Configure Environment
-```bash
-# Install dependencies
-pip install -r requirements.txt
-npm install
+### 2. Environment Configuration
 
-# Set up configuration files
-cp config/database.example.yml config/database.yml
-cp config/jenkins.example.yml config/jenkins.yml
+#### Environment Variable Handling
+
+The project supports flexible environment configuration through:
+- `.env` file
+- Docker build arguments
+- System environment variables
+- Dockerfile default values
+
+**Variable Precedence Order:**
+1. Docker build arguments
+2. `.env` file variables
+3. System environment variables
+4. Dockerfile default values
+
+### 3. Build Docker Image
+
+```bash
+docker build -t database-migration-automation .
 ```
 
-## Usage
+### 4. Run with Docker Compose
 
-### Database Migration
 ```bash
-# Validate migrations
-liquibase validate
+# Start services
+docker-compose up -d
 
-# Run migrations
-liquibase migrate
+# View logs
+docker-compose logs
+
+# Stop services
+docker-compose down
 ```
 
-### Jenkins Pipeline
-1. Configure Jenkins credentials
-2. Set up webhook integration
-3. Trigger pipeline manually or via Git push
+## 🧪 Testing
 
-## Security Features
+### Run Tests
+```bash
+# Python tests
+pytest tests/
 
-- Role-based access control
-- Encryption at rest and in transit
-- Network segmentation
-- Comprehensive auditing
-- Secrets management
+# Node.js tests
+npm test
 
-## Monitoring
-
-- Prometheus metrics
-- Grafana dashboards
-- Detailed logging
-- Performance tracking
-
-## Scalability Options
-
-- Read replicas
-- Connection pooling
-- Database sharding
-- Multi-region support
-
-## Cost Optimization
-
-- Spot instance utilization
-- Right-sized infrastructure
-- Incremental migration strategies
-- Reserved instance planning
+# Docker validation
+docker-compose config
+```
