@@ -1,0 +1,18 @@
+databases:
+  primary:
+    host: primary-db.example.com
+    port: 5432
+    name: maindb
+    user: dbadmin
+    ssl: true
+
+  replica:
+    host: replica-db.example.com
+    port: 5432
+    name: maindb_replica
+    user: dbadmin
+    ssl: true
+
+replication:
+  type: streaming
+  max_standby_delay: 30s

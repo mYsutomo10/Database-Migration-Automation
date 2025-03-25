@@ -1,0 +1,12 @@
+liquibase:
+  changeLog: migrations/changelog-master.xml
+  driver: org.postgresql.Driver
+  classpath: /path/to/postgresql-jdbc.jar
+  url: jdbc:postgresql://localhost:5432/yourdb
+  username: ${DB_USER}
+  password: ${DB_PASSWORD}
+
+migration:
+  strategy: rolling
+  batch_size: 1000
+  timeout: 60
