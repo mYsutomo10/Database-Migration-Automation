@@ -2,13 +2,7 @@
 ARG POSTGRES_VERSION=13
 FROM postgres:${POSTGRES_VERSION}
 
-# Install build arguments with default values
-ARG DB_NAME=migrationdb
-ARG DB_USER=dbadmin
-ARG DB_PASSWORD=securepassword
-ARG MIGRATION_STRATEGY=rolling
-
-# Environment variables can override build arguments
+# Environment variables
 ENV POSTGRES_DB=${DB_NAME}
 ENV POSTGRES_USER=${DB_USER}
 ENV POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -31,7 +25,7 @@ RUN chmod +x /docker-entrypoint-initdb.d/load-env.sh
 # Copy migration scripts and configuration
 COPY ./src/migrations /liquibase/changelog
 COPY ./src/scripts /scripts
-COPY .env.example /.env
+COPY .env
 
 # Install Python dependencies
 COPY requirements.txt /tmp/requirements.txt
