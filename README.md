@@ -65,22 +65,6 @@ liquibase migrate
 2. Set up webhook integration
 3. Trigger pipeline manually or via Git push
 
-## Project Structure
-```
-database-migration-automation/
-│
-├── src/
-│   ├── database/         # Database schema definitions
-│   ├── migrations/       # Liquibase changelog files
-│   ├── scripts/          # Supporting scripts
-│   └── config/           # Configuration templates
-│
-├── jenkins/              # Jenkins pipeline configurations
-├── ansible/              # Infrastructure as Code
-├── docs/                 # Documentation
-└── tests/                # Test suites
-```
-
 ## Security Features
 
 - Role-based access control
